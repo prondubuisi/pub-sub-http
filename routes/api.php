@@ -19,8 +19,8 @@ use App\Http\Controllers\PublicationSubscriptionController;
 
 Route::get('/', function (Request $request) {
     return json_encode(['message' => 'Hello and welcome to http pub sub']);
-} );
+} )->name('home');
 
-Route::post('/subscribe/{topic}', [SubscriptionController::class,'store' ]);
-Route::post('/publish/{topic}', [PublicationController::class,'store' ]);
-Route::get('/{endpoint}',  [PublicationSubscriptionController::class,'show' ]);
+Route::post('/subscribe/{topic}', [SubscriptionController::class,'store' ])->name('suscribe');
+Route::post('/publish/{topic}', [PublicationController::class,'store' ])->name('publish');
+Route::get('/{endpoint}',  [PublicationSubscriptionController::class,'show' ])->name('confirm.publication');

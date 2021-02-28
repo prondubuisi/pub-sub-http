@@ -19,6 +19,8 @@ class PublicationSubscriptionController extends Controller
         try{
             //get Subscription where url like
             $subscription =  Subscription::where('callback_url','LIKE','%'. $endpoint .'%')->first();
+            
+            //if subscription does not exist with specified endpoint
             if(!$subscription)
             {
                 return response()->json(['essage' => 'No known subscriptions for this endpoint'], 404);
@@ -32,7 +34,6 @@ class PublicationSubscriptionController extends Controller
             return response()->json(['message(s)' => $endpointMessages], 200);
         }
         catch(\Exception $exception){
-            dd($exception);
             Log::debug($exception);
             return response()->json(['response' => 'Something went wrong try again later'], 500);
         }
