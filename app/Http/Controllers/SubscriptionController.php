@@ -6,6 +6,7 @@ use App\Models\Subscription;
 use App\Http\Requests\SubscriptionRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use App\Models\PublicationSubscription;
 
 class SubscriptionController extends Controller
 {
@@ -45,12 +46,20 @@ class SubscriptionController extends Controller
             //map post data to table field for mass asignment
             $validatedData['callback_url'] =   $validatedData['url'];
 
-            Subscription::create($validatedData);
+            $subscription =  Subscription::create($validatedData);
             $responseData = [
                 'message' => "Subcription to topic added successfully",
                 'topic' => $validatedData['topic'],
                 'url' =>  $validatedData['url'],
             ];
+
+            //Add subscription to pivot table
+            PublicationSubscription::create(
+                [
+                    'topic' => $validatedData['topic'],
+                    'subscription_id' => $subscription->id,
+                ]
+            );
 
             return response()->json(["data" => $responseData], 201);
         }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Subscription;
+use App\Models\PublicationSubscription;
 
 class Publication extends Model
 {
@@ -14,7 +15,7 @@ class Publication extends Model
      */
     public function subscriptions()
     {
-        return $this->belongsToMany(Subscription::class);
+        return $this->belongsToMany(Subscription::class)->using(PublicationSubscription::class);
     }
 
 }
