@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePublicationsTable extends Migration
+class CreatePublicationSubscriptionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreatePublicationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('publications', function (Blueprint $table) {
+        Schema::create('publication_subscription', function (Blueprint $table) {
             $table->id();
             $table->string('topic');
-            $table->json('message');
-            $table->boolean('message_delivered')->default(false);
+            $table->unsignedBigInteger('publication_id')->nullable();
+            $table->unsignedBigInteger('subscription_id');
+            $table->json('message')->nullable();
+            $table->boolean('message_received')->default(false);
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreatePublicationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('publications');
+        Schema::dropIfExists('publication_subscription');
     }
 }
