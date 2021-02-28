@@ -13,6 +13,7 @@ class Publication extends Model
     /**
      * The subscriptions that belong to a publication
      */
+    protected $fillable = ['topic', 'message'];
     public function subscriptions()
     {
         return $this->belongsToMany(Subscription::class)->using(PublicationSubscription::class);

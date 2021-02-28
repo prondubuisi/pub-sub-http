@@ -37,7 +37,7 @@ class SubscriptionController extends Controller
      * @param  App\Http\Requests\SubscriptionRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SubscriptionRequest $request, $topic)
+    public function store(SubscriptionRequest $request)
     {
         $validatedData = $request->validated();
 
@@ -48,24 +48,24 @@ class SubscriptionController extends Controller
 
             $subscription =  Subscription::create($validatedData);
             $responseData = [
-                'message' => "Subcription to topic added successfully",
+                'response' => "Subcription to topic added successfully",
                 'topic' => $validatedData['topic'],
                 'url' =>  $validatedData['url'],
             ];
 
-            //Add subscription to pivot table
-            PublicationSubscription::create(
-                [
-                    'topic' => $validatedData['topic'],
-                    'subscription_id' => $subscription->id,
-                ]
-            );
+            // //Add subscription to pivot table
+            // PublicationSubscription::create(
+            //     [
+            //         'topic' => $validatedData['topic'],
+            //         'subscription_id' => $subscription->id,
+            //     ]
+            // );
 
             return response()->json(["data" => $responseData], 201);
         }
         catch(\Exception $exception) {
             Log::debug($exception);
-            return response()->json(["message" => 'Something went wrong try again later'], 500);
+            return response()->json(["response" => 'Something went wrong try again later'], 500);
         }
         
 

@@ -21,4 +21,4 @@ Route::post('/', function (Request $request) {
 } );
 
 Route::post('/subscribe/{topic}', [SubscriptionController::class,'store' ]);
-Route::post('/subscribe/{topic}', [SubscriptionController::class,'store' ]);
+Route::post('/publish/{topic}', [PublicationController::class,'store' ]);

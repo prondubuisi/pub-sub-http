@@ -16,7 +16,7 @@ class CreatePublicationsTable extends Migration
         Schema::create('publications', function (Blueprint $table) {
             $table->id();
             $table->string('topic');
-            $table->json('message');
+            $table->string('message');
             $table->boolean('message_delivered')->default(false);
             $table->timestamps();
         });
