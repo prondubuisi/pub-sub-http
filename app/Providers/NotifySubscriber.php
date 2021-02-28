@@ -8,7 +8,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
 use App\Models\Subscription;
 
-class NotifySuscriber
+class NotifySubscriber
 {
     /**
      * Publication attribute

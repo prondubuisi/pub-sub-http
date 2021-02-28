@@ -19,7 +19,7 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         TopicPublished::class => [
-            NotifySuscriber::class,
+            NotifySubscriber::class,
         ],
     ];
 
