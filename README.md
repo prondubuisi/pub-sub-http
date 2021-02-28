@@ -14,7 +14,7 @@ A publisher subscriber  pattern example using http requests
 | url      | Standard url, unique for every subscription  | YES         |
 
 ## Publisher
-| `Endpoint` | `publish/{topic}` |      |
+| `Endpoint` | `/publish/{topic}` |      |
 | :---------| :------------ | ----- |
 | Request Type |  POST       |    
 | Description  | Creates a new publication, sending a notification to all suscribers with same topic as the `topic` parameter |
@@ -39,9 +39,12 @@ Model View Controller(MVC) using Laravel
 * Subscription Schema
 
     * ```
-        $table->id();
+            $table->id();
+            
             $table->string('topic');
+            
             $table->string('callback_url')->unique();
+            
             $table->timestamps();
     ```
 
@@ -62,12 +65,18 @@ Model View Controller(MVC) using Laravel
 * PublicationSubscription(Pivotal table) Schema
 
     * ```
-        $table->id();
+            $table->id();
+            
             $table->string('topic');
+            
             $table->unsignedBigInteger('publication_id');
+            
             $table->unsignedBigInteger('subscription_id');
+            
             $table->string('message');
+            
             $table->boolean('message_received')->default(false);
+            
             $table->timestamps();
     ```
 
@@ -91,6 +100,6 @@ Model View Controller(MVC) using Laravel
 - Run `php artisan key:generate` to generate a unique key for your apllication
 - Run `php artisan serve` and navigate to your browser to test app
 
-- Test seeders using /order1, /order2, order3
+- Test seeders using /order1, /order2, /order3
 
 
