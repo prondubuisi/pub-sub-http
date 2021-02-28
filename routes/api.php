@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\PublicationController;
+use App\Http\Controllers\PublicationSubscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,10 @@ use App\Http\Controllers\PublicationController;
 |
 */
 
-Route::post('/', function (Request $request) {
-    return 'Hello and welcome to http pub sub';
+Route::get('/', function (Request $request) {
+    return json_encode(['message' => 'Hello and welcome to http pub sub']);
 } );
 
 Route::post('/subscribe/{topic}', [SubscriptionController::class,'store' ]);
 Route::post('/publish/{topic}', [PublicationController::class,'store' ]);
+Route::get('/{endpoint}',  [PublicationSubscriptionController::class,'show' ]);
