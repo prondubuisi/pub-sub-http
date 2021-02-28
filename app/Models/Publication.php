@@ -16,7 +16,9 @@ class Publication extends Model
     protected $fillable = ['topic', 'message'];
     public function subscriptions()
     {
-        return $this->belongsToMany(Subscription::class)->using(PublicationSubscription::class);
+        return $this->belongsToMany(Subscription::class)
+            ->withTimestamps()
+            ->using(PublicationSubscription::class);
     }
 
 }

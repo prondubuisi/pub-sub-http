@@ -27,7 +27,7 @@ class SubscriptionRequest extends FormRequest
     {
         return [
             'topic' => 'required|string',
-            'url' => 'required|string|unique:subscriptions,callback_url'
+            'url' => 'required|url|unique:subscriptions,callback_url'
         ];
     }
 

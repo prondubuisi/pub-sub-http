@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PublicationRequest;
 use App\Models\PublicationSubscription;
 use Illuminate\Support\Facades\Log;
+use App\Providers\TopicPublished;
 
 class PublicationController extends Controller
 {
@@ -42,12 +43,15 @@ class PublicationController extends Controller
 
         try {
 
-            $subscription =  Publication::create($validatedData);
+            $publication =  Publication::create($validatedData);
             $responseData = [
                 'response' => "Publication to topic added successfully",
                 'topic' => $validatedData['topic'],
                 'message' =>  $validatedData['message'],
             ];
+
+            // Broadcast publication event to suscribers
+            TopicPublished::dispatch($publication);
 
             //Next step
             //Broadcast event

@@ -16,6 +16,8 @@ class Subscription extends Model
      */
     public function publications()
     {
-        return $this->belongsToMany(Publication::class)->using(PublicationSubscription::class);
+        return $this->belongsToMany(Publication::class)
+            ->withTimestamps()
+            ->using(PublicationSubscription::class);
     }
 }

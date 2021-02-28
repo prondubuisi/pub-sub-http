@@ -16,9 +16,9 @@ class CreatePublicationSubscriptionTable extends Migration
         Schema::create('publication_subscription', function (Blueprint $table) {
             $table->id();
             $table->string('topic');
-            $table->unsignedBigInteger('publication_id')->nullable();
+            $table->unsignedBigInteger('publication_id');
             $table->unsignedBigInteger('subscription_id');
-            $table->json('message')->nullable();
+            $table->string('message');
             $table->boolean('message_received')->default(false);
             $table->timestamps();
         });
